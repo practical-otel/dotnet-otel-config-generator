@@ -1,0 +1,35 @@
+service:
+  pipelines:
+    traces/default:
+      receivers:
+      - otlp
+      processors:
+      - batch
+      exporters:
+      - otlp/aspire
+    metrics/default:
+      receivers:
+      - otlp
+      processors:
+      - batch
+      exporters:
+      - otlp/aspire
+    logs/default:
+      receivers:
+      - otlp
+      processors:
+      - batch
+      exporters:
+      - otlp/aspire
+receivers:
+  otlp:
+    protocols:
+      http: {}
+      grpc: {}
+processors:
+  batch: {}
+exporters:
+  otlp/aspire:
+    endpoint: "${ASPIRE_ENDPOINT}"
+    tls:
+      insecure: true
